@@ -18,6 +18,7 @@ public class CameraActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		// 设置无标题
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//设置全屏幕
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.camera_light_layout);

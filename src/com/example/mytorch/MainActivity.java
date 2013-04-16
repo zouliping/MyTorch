@@ -43,14 +43,14 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.my_screen_light:
-				intent = new Intent(MainActivity.this,ScreenLightActivity.class);
+				intent = new Intent(MainActivity.this,
+						ScreenLightActivity.class);
 				startActivity(intent);
 				break;
 			case R.id.my_camera_light:
 				intent = new Intent(MainActivity.this, CameraActivity.class);
 				startActivity(intent);
 				break;
-
 			default:
 				break;
 			}

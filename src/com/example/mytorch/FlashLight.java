@@ -11,12 +11,12 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class FlashLight extends SurfaceView implements SurfaceHolder.Callback{
+public class FlashLight extends SurfaceView implements SurfaceHolder.Callback {
 
 	private SurfaceHolder surfaceHolder;
 	private Camera camera;
 	private Camera.Parameters parameters;
-	
+
 	public FlashLight(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		surfaceHolder = this.getHolder();
@@ -27,13 +27,13 @@ public class FlashLight extends SurfaceView implements SurfaceHolder.Callback{
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 		parameters = camera.getParameters();
-		if(parameters != null)
+		if (parameters != null)
 			parameters.setPictureFormat(PixelFormat.JPEG);
 		List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
 		Iterator<Camera.Size> iterator = sizeList.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Camera.Size cur = iterator.next();
-			Log.i("size", cur.width+" "+cur.height);
+			Log.i("size", cur.width + " " + cur.height);
 		}
 		parameters.setPreviewSize(800, 480);
 		parameters.setPictureSize(800, 480);
@@ -43,11 +43,11 @@ public class FlashLight extends SurfaceView implements SurfaceHolder.Callback{
 
 	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
-		try{
+		try {
 			camera = Camera.open();
 			camera.setPreviewDisplay(surfaceHolder);
-		}catch (Exception e) {
-			if(camera != null)
+		} catch (Exception e) {
+			if (camera != null)
 				camera.release();
 			camera = null;
 		}
@@ -55,7 +55,7 @@ public class FlashLight extends SurfaceView implements SurfaceHolder.Callback{
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
-		if(camera == null)
+		if (camera == null)
 			return;
 		camera.stopPreview();
 		camera.release();
@@ -64,16 +64,17 @@ public class FlashLight extends SurfaceView implements SurfaceHolder.Callback{
 
 	/**
 	 * 设置手电筒的开关状态
+	 * 
 	 * @param isOn
 	 */
-	public void setCameraLight(boolean isOn){
-		if(camera == null)
+	public void setCameraLight(boolean isOn) {
+		if (camera == null)
 			return;
-		if(parameters == null)
+		if (parameters == null)
 			parameters = camera.getParameters();
-		if(isOn)
+		if (isOn)
 			parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-		else 
+		else
 			parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 		camera.setParameters(parameters);
 	}
